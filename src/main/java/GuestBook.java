@@ -1,18 +1,16 @@
-import dao.sql.ConnectionPool;
+import controller.Controller;
+import server.ServerGuestBook;
 
-import java.sql.SQLException;
 
 public class GuestBook {
     public static void main(String[] args) {
-        final String URL = "jdbc:postgresql://192.168.10.171:5432/guestbook";
+        final String URL = "jdbc:postgresql://localhost:5432/guestbook";
         final String USER = "pl";
         final String PASSWORD = "postgres";
+        ServerGuestBook serverGuestBook = new ServerGuestBook();
 
-        ConnectionPool connectionPool = null;
-        try {
-            connectionPool = ConnectionPool.create(URL, USER, PASSWORD);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        Controller controller = new Controller(URL, USER, PASSWORD, serverGuestBook);
+        controller.run();
     }
 }
