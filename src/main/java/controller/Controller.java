@@ -20,12 +20,7 @@ public class Controller {
     }
 
     public void run() {
-        ConnectionPool connectionPool = null;
-        try {
-            connectionPool = ConnectionPool.create(url, user, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
 
         try {
             serverGuestBook.startServer();
