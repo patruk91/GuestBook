@@ -7,7 +7,7 @@ public class GuestForm {
     private Date date;
     private String message;
 
-    public GuestForm(String name, Date date, String message) {
+    public GuestForm(String name, String message, Date date) {
         this.name = name;
         this.date = date;
         this.message = message;

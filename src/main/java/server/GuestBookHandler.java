@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServerHandler implements HttpHandler {
+public class GuestBookHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String response = "";
@@ -25,6 +25,7 @@ public class ServerHandler implements HttpHandler {
             String formData = bufferedReader.readLine();
             System.out.println(formData);
             Map<String, String> inputs = parseFromData(formData);
+
         }
 
         exchange.sendResponseHeaders(200, response.length());
