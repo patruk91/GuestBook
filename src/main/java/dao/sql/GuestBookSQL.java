@@ -5,6 +5,9 @@ import dao.IGuestBookDao;
 import model.GuestForm;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +31,13 @@ public class GuestBookSQL implements IGuestBookDao {
     }
 
     private void addRecordToDataBase(String name, String message, Connection connection) throws SQLException {
+        LocalDateTime localDate =  LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(localDate);
         try(PreparedStatement stmt = connection.prepareStatement(
                 "INSERT INTO records(name, message, date) VALUES(?, ?, ?)")) {
             stmt.setString(1, name);
             stmt.setString(2, message);
-            stmt.setDate(3, new Date(System.currentTimeMillis()));
+            stmt.setTimestamp(3, timestamp);
             stmt.executeUpdate();
         }
     }
@@ -64,7 +69,7 @@ public class GuestBookSQL implements IGuestBookDao {
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 String message = resultSet.getString("message");
-                Date date = resultSet.getDate("date");
+                Timestamp date = resultSet.getTimestamp("date");
                 GuestForm guestForm = new GuestForm(name, message, date);
                 guestsForms.add(guestForm);
             }

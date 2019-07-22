@@ -1,13 +1,16 @@
 package model;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class GuestForm {
     private String name;
-    private Date date;
+    private Timestamp date;
     private String message;
 
-    public GuestForm(String name, String message, Date date) {
+    public GuestForm(String name, String message, Timestamp date) {
         this.name = name;
         this.date = date;
         this.message = message;
@@ -21,11 +24,11 @@ public class GuestForm {
         this.name = name;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
