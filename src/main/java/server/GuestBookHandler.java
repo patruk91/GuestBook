@@ -27,10 +27,7 @@ public class GuestBookHandler implements HttpHandler {
         String method = exchange.getRequestMethod();
 
         if (method.equals("GET")) {
-            response = "<html><body>\n" +
-                    displayAllRecords() +
-                    createHTMLForm() +
-                    "</body></html>";
+            response = displayPage();
         }
 
         if(method.equals("POST")) {
@@ -40,10 +37,7 @@ public class GuestBookHandler implements HttpHandler {
             System.out.println(formData);
             Map<String, String> inputs = parseFromData(formData);
             guestBookDao.insertRecord(inputs.get("name"), inputs.get("message"));
-            response = "<html><body>\n" +
-                    displayAllRecords() +
-                    createHTMLForm() +
-                    "</body></html>";
+            response = displayPage();
 
         }
 
@@ -52,6 +46,16 @@ public class GuestBookHandler implements HttpHandler {
         outputStream.write(response.getBytes());
         outputStream.close();
 
+    }
+
+    private String displayPage() {
+        String response;
+        response = "<html><body>\n" +
+                "    <h1>Simple Guestbook</h1>\n" +
+                displayAllRecords() +
+                createHTMLForm() +
+                "</body></html>";
+        return response;
     }
 
     private String displayAllRecords() {
